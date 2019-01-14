@@ -31,6 +31,7 @@ type Event struct {
 	CurrentStep int               `json:"currentStep"`
 	EventTime   int64             `json:"eventTime"`
 	PushedTags  map[string]string `json:"pushedTags"`
+	Remark      string            `json:"remark"` // 事件发生的备注信息，主要用于第三方上报必要的detail信息。
 }
 
 func (this *Event) FormattedTime() string {
@@ -39,7 +40,8 @@ func (this *Event) FormattedTime() string {
 
 func (this *Event) String() string {
 	return fmt.Sprintf(
-		"<Endpoint:%s, Status:%s, Strategy:%v, Expression:%v, LeftValue:%s, CurrentStep:%d, PushedTags:%v, TS:%s>",
+		"<Endpoint:%s, Status:%s, Strategy:%v, Expression:%v, LeftValue:%s, " +
+			"CurrentStep:%d, PushedTags:%v, TS:%s, Remark:%s>",
 		this.Endpoint,
 		this.Status,
 		this.Strategy,
@@ -48,6 +50,7 @@ func (this *Event) String() string {
 		this.CurrentStep,
 		this.PushedTags,
 		this.FormattedTime(),
+		this.Remark,
 	)
 }
 

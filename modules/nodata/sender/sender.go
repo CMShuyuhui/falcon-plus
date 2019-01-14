@@ -36,8 +36,10 @@ var (
 	sema    = tsema.NewSemaphore(1)
 )
 
-func AddMock(key string, endpoint string, metric string, tags string, ts int64, dstype string, step int64, value interface{}) {
-	item := &cmodel.JsonMetaData{metric, endpoint, ts, step, value, dstype, tags}
+func AddMock(key string, endpoint string, metric string,
+	tags string, ts int64, dstype string, step int64, remark string, value interface{}) {
+	item := &cmodel.JsonMetaData{metric, endpoint, ts,
+	step, value, dstype, tags, remark}
 	MockMap.Put(key, item)
 }
 

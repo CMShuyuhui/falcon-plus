@@ -28,11 +28,12 @@ type MetricValue struct {
 	Type      string      `json:"counterType"`
 	Tags      string      `json:"tags"`
 	Timestamp int64       `json:"timestamp"`
+	Remark    string      `json:"remark"`
 }
 
 func (this *MetricValue) String() string {
 	return fmt.Sprintf(
-		"<Endpoint:%s, Metric:%s, Type:%s, Tags:%s, Step:%d, Time:%d, Value:%v>",
+		"<Endpoint:%s, Metric:%s, Type:%s, Tags:%s, Step:%d, Time:%d, Value:%v, Remark:%s>",
 		this.Endpoint,
 		this.Metric,
 		this.Type,
@@ -40,6 +41,7 @@ func (this *MetricValue) String() string {
 		this.Step,
 		this.Timestamp,
 		this.Value,
+		this.Remark,
 	)
 }
 
@@ -52,11 +54,13 @@ type JsonMetaData struct {
 	Value       interface{} `json:"value"`
 	CounterType string      `json:"counterType"`
 	Tags        string      `json:"tags"`
+	Remark      string      `json:"remark"`
 }
 
 func (t *JsonMetaData) String() string {
-	return fmt.Sprintf("<JsonMetaData Endpoint:%s, Metric:%s, Tags:%s, DsType:%s, Step:%d, Value:%v, Timestamp:%d>",
-		t.Endpoint, t.Metric, t.Tags, t.CounterType, t.Step, t.Value, t.Timestamp)
+	return fmt.Sprintf("<JsonMetaData Endpoint:%s, Metric:%s, Tags:%s, DsType:%s, Step:%d, "+
+		"Value:%v, Timestamp:%d, Remark:%s>",
+		t.Endpoint, t.Metric, t.Tags, t.CounterType, t.Step, t.Value, t.Timestamp, t.Remark)
 }
 
 type MetaData struct {
@@ -67,11 +71,12 @@ type MetaData struct {
 	Value       float64           `json:"value"`
 	CounterType string            `json:"counterType"`
 	Tags        map[string]string `json:"tags"`
+	Remark      string            `json:"remark"`
 }
 
 func (t *MetaData) String() string {
-	return fmt.Sprintf("<MetaData Endpoint:%s, Metric:%s, Timestamp:%d, Step:%d, Value:%f, Tags:%v>",
-		t.Endpoint, t.Metric, t.Timestamp, t.Step, t.Value, t.Tags)
+	return fmt.Sprintf("<MetaData Endpoint:%s, Metric:%s, Timestamp:%d, Step:%d, Value:%f, Tags:%v, Remark:%s>",
+		t.Endpoint, t.Metric, t.Timestamp, t.Step, t.Value, t.Tags, t.Remark)
 }
 
 func (t *MetaData) PK() string {

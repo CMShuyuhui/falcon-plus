@@ -24,7 +24,7 @@ import (
 
 func BuildCommonSMSContent(event *model.Event) string {
 	return fmt.Sprintf(
-		"[P%d][%s][%s][][%s %s %s %s %s%s%s][O%d %s]",
+		"[P%d][%s][%s][][%s %s %s %s %s%s%s][O%d %s][remark:%s]",
 		event.Priority(),
 		event.Status,
 		event.Endpoint,
@@ -37,12 +37,13 @@ func BuildCommonSMSContent(event *model.Event) string {
 		utils.ReadableFloat(event.RightValue()),
 		event.CurrentStep,
 		event.FormattedTime(),
+		event.Remark,
 	)
 }
 
 func BuildCommonIMContent(event *model.Event) string {
 	return fmt.Sprintf(
-		"[P%d][%s][%s][][%s %s %s %s %s%s%s][O%d %s]",
+		"[P%d][%s][%s][][%s %s %s %s %s%s%s][O%d %s][remark:%s]",
 		event.Priority(),
 		event.Status,
 		event.Endpoint,
@@ -55,13 +56,15 @@ func BuildCommonIMContent(event *model.Event) string {
 		utils.ReadableFloat(event.RightValue()),
 		event.CurrentStep,
 		event.FormattedTime(),
+		event.Remark,
 	)
 }
 
 func BuildCommonMailContent(event *model.Event) string {
 	link := g.Link(event)
 	return fmt.Sprintf(
-		"%s\r\nP%d\r\nEndpoint:%s\r\nMetric:%s\r\nTags:%s\r\n%s: %s%s%s\r\nNote:%s\r\nMax:%d, Current:%d\r\nTimestamp:%s\r\n%s\r\n",
+		"%s\r\nP%d\r\nEndpoint:%s\r\nMetric:%s\r\nTags:%s\r\n%s: %s%s%s\r\nNote:%s\r\nMax:%d, " +
+			"Current:%d\r\nTimestamp:%s\r\n%s\r\n[Remark:%s]\r\n",
 		event.Status,
 		event.Priority(),
 		event.Endpoint,
@@ -76,6 +79,7 @@ func BuildCommonMailContent(event *model.Event) string {
 		event.CurrentStep,
 		event.FormattedTime(),
 		link,
+		event.Remark,
 	)
 }
 

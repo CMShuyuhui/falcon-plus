@@ -96,7 +96,8 @@ func judge() {
 }
 
 func genMock(ts int64, key string, ndcfg *cmodel.NodataConfig) {
-	sender.AddMock(key, ndcfg.Endpoint, ndcfg.Metric, cutils.SortedTags(ndcfg.Tags), ts, ndcfg.Type, ndcfg.Step, ndcfg.Mock)
+	sender.AddMock(key, ndcfg.Endpoint, ndcfg.Metric, cutils.SortedTags(ndcfg.Tags),
+		ts, ndcfg.Type, ndcfg.Step, "remark",ndcfg.Mock)
 }
 
 //mock的数据,要前移1+个周期、防止覆盖正常值
